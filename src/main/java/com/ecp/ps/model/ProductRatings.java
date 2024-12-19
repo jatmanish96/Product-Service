@@ -1,5 +1,6 @@
 package com.ecp.ps.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class ProductRatings {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
+    @JsonBackReference
     private Products products;
 
     @Column(name = "created_at" ,updatable = false)
