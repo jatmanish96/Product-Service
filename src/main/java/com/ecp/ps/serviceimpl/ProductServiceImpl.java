@@ -1,6 +1,7 @@
 package com.ecp.ps.serviceimpl;
 
 import com.ecp.ps.controllerimpl.ProductCotrollerImpl;
+import com.ecp.ps.dao.IProductDao;
 import com.ecp.ps.model.Products;
 import com.ecp.ps.repository.ProductRepository;
 import com.ecp.ps.service.IProductService;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -22,6 +24,12 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private IProductDao iProductDao;
 
     @Override
     public ResponseEntity<Long> count() {
@@ -36,11 +44,11 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ResponseEntity<List<Products>> search() {
+    public ResponseEntity<?> search(String query ,Long limit,Long ulimit) {
         logger.info("ProductService class count method");
         List<Products> productsList=null;
         try{
-            productsList = productRepository.findAll();
+            productsList = iProductDao.search(query, limit, ulimit);
         }
         catch (Exception e){
             throw  new NullPointerException(e.getMessage());

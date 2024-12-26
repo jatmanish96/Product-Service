@@ -29,9 +29,9 @@ public class ProductCotrollerImpl implements IProductController {
     }
 
     @Override
-    public ResponseEntity<List<Products>> search() {
+    public ResponseEntity<?> search(String query,Long llimit,Long ulimit) {
         logger.info("Product Cotroller class search method");
-        return iProductService.search();
+        return iProductService.search(query,llimit,ulimit);
     }
 
     @Override

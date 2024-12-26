@@ -12,7 +12,7 @@ public interface IProductService {
     public ResponseEntity<Long> count();
 
 
-    public ResponseEntity<List<Products>>search();
+    public ResponseEntity<?>search(String query,Long llimit,Long ulimit);
 
 
     public ResponseEntity<Products> create( Products products);
